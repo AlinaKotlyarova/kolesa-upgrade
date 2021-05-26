@@ -7,7 +7,7 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - WebBrowser:
+        - WebDriver:
             url: http://automationpractice.com/index.php
             host: localhost
             port: 9515
