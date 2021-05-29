@@ -3,33 +3,33 @@ namespace Page\Acceptance;
 
 class SearchPage
 {
-    // include url of current page
-    public static $URL = 'http://automationpractice.com';
+    /**
+     * Урл страницы поисковой выдачи
+     */
+    public static $searchByCategoryUrl = '?id_category=11&controller=category';
+    
+   /**
+     * Селектор центрального блока страницы выдачи
+     */
+    public static $centerBlock = '.center_column';
 
     /**
-     * Declare UI map for this page here. CSS or XPath allowed.
-     * public static $usernameField = '#username';
-     * public static $formSubmitButton = "#mainForm input[type=submit]";
+     * Селектор выбранного типа сортировки товаров
      */
+    public static  $selectedViewType = '.sortPagiBar li.selected a';
 
     /**
-     * Basic route example for your current URL
-     * You can append any additional parameter to URL
-     * and use it in tests like: Page\Edit::route('/123-post');
+     * Селектор отображения товаров в виде сетки
      */
-    public static function route($param)
-    {
-        return static::$URL.$param;
-    }
+    public static $productViewGrid = '.center_column > .grid';
 
     /**
-     * @var \AcceptanceTester;
+     * Селектор иконки для отображения товаров в виде списка
      */
-    protected $acceptanceTester;
+    public static $listView = '#list';
 
-    public function __construct(\AcceptanceTester $I)
-    {
-        $this->acceptanceTester = $I;
-    }
-
+    /**
+     * Селектор отображения товаров в виде спсика
+     */
+    public static $productViewList = '.center_column > .list';
 }
