@@ -1,6 +1,9 @@
 <?php
 namespace Page\Acceptance;
 
+/**
+ * Страница с результатми поиска
+ */
 class SearchPage
 {
     /**

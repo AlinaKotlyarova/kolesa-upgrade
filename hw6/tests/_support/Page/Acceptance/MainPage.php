@@ -1,6 +1,9 @@
 <?php
 namespace Page\Acceptance;
 
+/**
+ * Главая страница
+ */
 class MainPage
 {
     /**
