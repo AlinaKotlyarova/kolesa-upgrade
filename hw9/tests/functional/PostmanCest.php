@@ -3,40 +3,23 @@
 namespace Tests\Functional;
 use Faker\Factory;
 use Helper\BaseHelper;
+use Step\Functional\UserStep;
 
+/**
+ * Класс для тестирвоания Api
+ * http://api.izze.xyz/test/
+ */
 class PostmanCest
 {
     /**
-    * Создание юзера с помощью faker-а
-    * @group 123
-    */
-    public function _before(\FunctionalTester $I)
-    {
-        $faker = Factory::create('ru_RU');
-
-        $data = [
-            'email' => $faker->email,
-            'name'  => $faker->firstName,
-            'owner' => '@Kotlyarova_Alina',
-            'job'   => $faker->company
-        ];
-
-        $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->sendPost('human', $data);
-        $I->seeResponseCodeIsSuccessful();
-        $I->seeResponseIsJson();
-        $I->seeResponseContainsJson(['status' => 'ok']); 
-    }
-
-    /**
-     * Проверка обновления профиля пользователя и удаление пользователя
-     * @group 123
+     * Проверка обновления профиля пользователя
+     * 
+     * @after checkUserDelete
      */
-    public function checkPutAndDeleteUser(\FunctionalTester $I){
-         $userData = $I->grabResponse();
-         $arr      = json_decode($userData, true);
-         $userId   = $arr['_id'];
-         $path     = 'human?_id=' . $userId;
+    public function checkUpdateUser(\Step\Functional\UserStep $I){
+
+         $userId = $I->createUser();
+         $path   = 'human?_id=' . $userId;
         
          $I->sendPUT(
             $path, 
@@ -45,7 +28,7 @@ class PostmanCest
                     'name'      => 'Alina',
                     'owner'     => '@Kotlyarova_Alina',
                     'job'       => 'Web QA',
-                    'superhero' => false,
+                    'superhero' => (bool)random_int(0, 1),
                     'skill'     => $I->getFaker()->text,
                 ]
             );
@@ -64,7 +47,14 @@ class PostmanCest
                 'job'       => 'Web QA'
             ]
         );
-        
+    }
+
+    /**
+     * Проверка удаления пользователя
+     */
+    protected function checkUserDelete(\Step\Functional\UserStep $I){
+        $userId = $I->getUserId();
+        $path   = 'human?_id=' . $userId;
         $I->sendDelete($path);
         $I->seeResponseCodeIsSuccessful();
         $I->seeResponseIsJson();
@@ -75,7 +65,7 @@ class PostmanCest
             ]
         );
         $I->sendGet('people?owner=@Kotlyarova_Alina');
-        $I->dontSeeResponseContainsJson(['owner' => '@Kotlyarova_Alina']);  
+        $I->seeResponseContainsJson([]);
     }
 }
 
