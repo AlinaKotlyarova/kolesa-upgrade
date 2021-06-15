@@ -18,8 +18,6 @@ jobs:
         export DISPLAY=:99
           chromedriver --headless --no-sandbox --disable-dev-shm-usage --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-      - name: Install Rest
-        run: composer require --dev codeception/module-rest
       - name: Run test cases
         run: php vendor/bin/codecept run --steps -vvv --xml
       - name: JUnit Report Action
