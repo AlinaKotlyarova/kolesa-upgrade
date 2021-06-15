@@ -9,7 +9,13 @@ actor: FunctionalTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://automationpractice.com/index.php
+            url: 'http://api.izze.xyz/test/'
+            headers:
+               Content-Type: application/json
         - \Helper\Functional
+        - \Helper\BaseHelper
         - Asserts
+        - REST:
+           depends: PhpBrowser
+           url: 'http://api.izze.xyz/test/'
     step_decorators: ~        
