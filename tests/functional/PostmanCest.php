@@ -29,7 +29,7 @@ class PostmanCest
                     'owner'     => '@Kotlyarova_Alina',
                     'job'       => 'Web QA',
                     'superhero' => (bool)random_int(0, 1),
-                    'skill'     => $I->getFaker()->text,
+                    'skill'     => 'skill',
                 ]
             );
 
