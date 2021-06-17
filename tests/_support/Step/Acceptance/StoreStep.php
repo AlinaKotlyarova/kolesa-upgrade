@@ -33,6 +33,7 @@ class StoreStep extends \AcceptanceTester
 
     public function clearWishlist(){
         $I = $this;
+        $I->waitForElementVisible(WishListsPage::$deleteBtn);
         $I->click(WishListsPage::$deleteBtn);
         $I->acceptPopup();
     }
