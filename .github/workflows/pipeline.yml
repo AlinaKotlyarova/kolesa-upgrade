@@ -6,8 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: nanasess/setup-php@master
+        with:
+          php-version: '7.4'
       - name: Install dependencies
         run: composer install
+      - name: Install Faker
+        run: composer require fzaninotto/Faker
       - name: Run chromedriver
         run: nohup $CHROMEWEBDRIVER/chromedriver --url-base=/wd/hub /dev/null 2>&1 &
       - name: Run test
