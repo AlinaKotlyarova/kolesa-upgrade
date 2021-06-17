@@ -7,7 +7,7 @@
 actor: AcceptanceTester
 modules:
     enabled:
-        - Webdriver
+        - WebDriver
         - \Helper\Acceptance
         - Asserts
     config:    
